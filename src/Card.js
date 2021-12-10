@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 const card = [
   { Q: "O que é JSX?", R: "Uma extensão de linguagem do JavaScript" },
   {
@@ -34,23 +36,25 @@ const botao = [
 let cardNumero = "1/8";
 
 export default function Card() {
+
+  const [cartaState , setCartaState] = useState("Pergunta")
+
   return (
     <>
       <div className="card">
-        {/* <FrontCard /> */}
-        <CardTras />
+        {cartaState === "Pergunta" ? <FrontCard  mudaLado ={setCartaState}/> : <CardTras />}
       </div>
     </>
   );
 }
 
-function FrontCard() {
+function FrontCard(props) {
   return (
     <div className="front-face">
       <div className="topo-card-frente">{cardNumero}</div>
       <span>{card[0].Q}</span>
       <div className="baixo-card-frente">
-        <img src="./assets/turn.png" />
+        <img src="./assets/turn.png"  onClick={() => {props.mudaLado("Resposta")}}/>
       </div>
     </div>
   );
