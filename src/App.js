@@ -16,7 +16,7 @@ export default function App(){
     return(
         <>
 
-        {paginaAtual === 'Inicial' ? <TelaInicial  mudaPagina={setPaginaAtual}/> : paginaAtual === 'App'? <TelaCard/> : <TelaFinal /> }
+        {paginaAtual === 'Inicial' ? <TelaInicial  mudaPagina={setPaginaAtual}/> : paginaAtual === 'App'? <TelaCard mudaPagina={setPaginaAtual}/> : <TelaFinal /> }
         
         
         

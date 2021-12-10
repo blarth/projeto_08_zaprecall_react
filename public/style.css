@@ -6,6 +6,9 @@ body {
 .imagem-inicial {
   height: 217px;
   width: 171px;
+  position: absolute;
+  top: 25%;
+  left: 45%
 }
 .botao-inicial {
   height: 72px;
@@ -17,6 +20,9 @@ body {
   align-items: center;
   border: 3px solid #ffef61;
   background-color: #e5e5e5;
+  position: absolute;
+  top: 75%;
+  
 }
 
 .root {

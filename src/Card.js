@@ -1,30 +1,33 @@
 import { useState } from "react";
 
 const card = [
-  { Q: "O que é JSX?", R: "Uma extensão de linguagem do JavaScript" },
+  { questao: "O que é JSX?", resposta: "Uma extensão de linguagem do JavaScript" },
   {
-    Q: "O React é __",
-    R: "uma biblioteca JavaScript para construção de interfaces",
+    questao: "O React é __",
+    resposta: "uma biblioteca JavaScript para construção de interfaces",
   },
-  { Q: "Componentes devem iniciar com __", R: "letra maiúscula" },
-  { Q: "Podemos colocar __ dentro do JSX", R: " expressões" },
+  { questao: "Componentes devem iniciar com __", resposta: "letra maiúscula" },
+  { questao: "Podemos colocar __ dentro do JSX", resposta: " expressões" },
   {
-    Q: "O ReactDOM nos ajuda __",
-    R: "interagindo com a DOM para colocar componentes React na mesma",
-  },
-  {
-    Q: "Usamos o npm para __",
-    R: "gerenciar os pacotes necessários e suas dependências",
+    questao: "O ReactDOM nos ajuda __",
+    resposta: "interagindo com a DOM para colocar componentes React na mesma",
   },
   {
-    Q: "Usamos props para __",
-    R: "passar diferentes informações para componentes",
+    questao: "Usamos o npm para __",
+    resposta: "gerenciar os pacotes necessários e suas dependências",
   },
   {
-    Q: "Usamos estado (state) para __",
-    R: "dizer para o React quais informações quando atualizadas devem renderizar a tela novamente",
+    questao: "Usamos props para __",
+    resposta: "passar diferentes informações para componentes",
+  },
+  {
+    questao: "Usamos estado (state) para __",
+    resposta: "dizer para o React quais informações quando atualizadas devem renderizar a tela novamente",
   },
 ];
+
+
+
 
 const botao = [
   { text: "Aprendi agora", cor: "preto" },
@@ -33,26 +36,28 @@ const botao = [
   { text: "Zap", cor: "amarelo" },
 ];
 
-let cardNumero = "1/8";
 
 export default function Card() {
+  const [numeroCard , setnumeroCard] = useState(0)
+  let numeroInfo = numeroCard + 1
 
   const [cartaState , setCartaState] = useState("Pergunta")
 
   return (
     <>
       <div className="card">
-        {cartaState === "Pergunta" ? <FrontCard  mudaLado ={setCartaState}/> : <CardTras />}
+        {cartaState === "Pergunta" ? <FrontCard  mudaLado ={setCartaState} infoCard={numeroInfo} numeroCard={numeroCard}/> : <CardTras infoCard={numeroCard} mudaCarta={setnumeroCard}/>}
       </div>
     </>
   );
 }
 
+
 function FrontCard(props) {
   return (
     <div className="front-face">
-      <div className="topo-card-frente">{cardNumero}</div>
-      <span>{card[0].Q}</span>
+      <div className="topo-card-frente">{props.numeroInfo}</div>
+      <div>{card[props.numeroCard]}</div>
       <div className="baixo-card-frente">
         <img src="./assets/turn.png"  onClick={() => {props.mudaLado("Resposta")}}/>
       </div>
@@ -60,22 +65,33 @@ function FrontCard(props) {
   );
 }
 
-function CardTras() {
+function CardTras({numeroCard, mudaCarta}) {
   return (
     <div className="back-face">
-      <div className="topo-card-tras">
-        <span>{card[0].Q}</span>
-        <div className="info-card">{cardNumero}</div>
-      </div>
-      <div className="resposta-card">{card[0].R}</div>
+      {card.map(({questao , resposta}) => { return <InfoCard  questao={questao} resposta={resposta} infoCard={numeroCard}/>})}
       <div className="baixo-card-tras">
         {botao.map(({ text, cor }) => {
-          return <Botao text={text} cor={cor} />;
+          return <Botao text={text} cor={cor} infoCard={numeroCard} mudaCarta={mudaCarta}/>;
         })}
       </div>
     </div>
   );
 }
-function Botao({ text, cor }) {
-  return <button className={cor}>{text}</button>;
+function Botao({ text, cor, mudaCarta, infoCard }) {
+  return <button onCLick={mudaCarta(infoCard)} className={cor}>{text}</button>;
 }
+
+
+function InfoCard(props){
+  return (
+    <>
+    <div className="topo-card-tras">
+      <span>{props.questao}</span>
+      <div className="info-card">{props.numeroCard}</div>
+    </div>
+    <div className="resposta-card">{props.resposta}</div>
+    </>
+  )
+  
+}
+
