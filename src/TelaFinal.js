@@ -1,11 +1,12 @@
 import IconeTopo from "./IconeTopo";
-
-export default function TelaFinal(){
+import party from "./assets/party.png"
+import sad from "./assets/sad.png"
+export default function TelaFinal({condicao}){
     return (
         <>
             <IconeTopo />
-            {/* <TelaSucesso /> */}
-            <TelaFracasso />
+            {condicao === "vitoria" ? <TelaSucesso /> : <TelaFracasso />}
+            
         </>
     )
 }
@@ -16,9 +17,9 @@ function TelaSucesso (){
         <>
         <div className="resultado">
             <span>Parabéns!</span>
-            <img src="./assets/party.png"/>
+            <img src={party} alt="error"/>
         </div>
-        <div class="texto-resultado">Você não esqueceu de nenhum flashcard!</div>
+        <div className="texto-resultado">Você não esqueceu de nenhum flashcard!</div>
     </>
     )
 }
@@ -28,9 +29,9 @@ function TelaFracasso (){
         <>
         <div className="resultado">
             <span>Putz.. </span>
-            <img src="./assets/sad.png"/>
+            <img src={sad} alt="error"/>
         </div>
-        <div class="texto-resultado">Você esqueceu alguns flashcards.. <br/>Não desanime! Na próxima você consegue!</div>
+        <div className="texto-resultado">Você esqueceu alguns flashcards.. <br/>Não desanime! Na próxima você consegue!</div>
     </>
     )
 }

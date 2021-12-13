@@ -1,4 +1,6 @@
 import { useState } from "react"
+import "./style.css"
+import "./reset.css"
 
 import TelaInicial from "./TelaInicial"
 import TelaCard from "./TelaCard"
@@ -16,7 +18,7 @@ export default function App(){
     return(
         <>
 
-        {paginaAtual === 'Inicial' ? <TelaInicial  mudaPagina={setPaginaAtual}/> : paginaAtual === 'App'? <TelaCard mudaPagina={setPaginaAtual}/> : <TelaFinal /> }
+        {paginaAtual === 'Inicial' ? <TelaInicial  mudaPagina={setPaginaAtual}/> : paginaAtual === 'App'? <TelaCard mudaPagina={setPaginaAtual}/> : paginaAtual === "AcertouTodas" ? <TelaFinal condicao={"vitoria"} /> : <TelaFinal condicao={"derrota"} />}
         
         
         
